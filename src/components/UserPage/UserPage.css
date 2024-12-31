@@ -1,0 +1,91 @@
+.standard-button {
+    height: 50px;
+    width: 200px;
+    margin-left: 20px;
+}
+
+
+.userPageBtn{
+
+}
+
+/* Container styling */
+.addCharacterFormContainer {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Form inputs */
+  .addCharacterInputs {
+    margin-bottom: 20px;
+    margin-right: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  
+  input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.25);
+  }
+  
+  /* Boss gallery styling */
+  .bossGalleryContainer {
+    margin-top: 20px;
+  }
+  
+  .bossGallery {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 10px;
+  }
+  
+  .bossGallery li {
+    padding: 8px;
+    background-color: #efefef;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+  }
+  
+  /* Submit button */
+  .submit-button {
+    margin-top: 40px;
+    width: 100%;
+    padding: 10px 15px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .submit-button:hover {
+    background-color: #0056b3;
+  }

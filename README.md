@@ -18,7 +18,7 @@ Before you get started, make sure you have the following software installed on y
 
 ## Create Database and Table
 
-Create a new database called `prime_app` and create a `user` table:
+Create a new database called `boss_mule_tracker` and create a `user` table:
 
 ```SQL
 CREATE TABLE "user" (
