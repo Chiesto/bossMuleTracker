@@ -32,6 +32,7 @@ app.use('/api/user', userRouter);
 app.use('/getCharacters', characterRouter);
 app.use('/getBosses', bossRouter);
 app.use('/getUserCharacters', userCharactersRouter);
+app.use('/postUserCharacter', userCharactersRouter);
 
 
 // Listen Server & Port

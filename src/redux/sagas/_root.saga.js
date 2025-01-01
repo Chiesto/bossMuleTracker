@@ -5,6 +5,7 @@ import userSaga from './user.saga';
 import getCharactersSaga from './getCharacters.saga';
 import getBossesSaga from './getBosses.saga';
 import getUserCharactersSaga from './getUserCharacters.saga';
+import postUserCharactersSaga from './postUserCharacter.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -21,5 +22,7 @@ export default function* rootSaga() {
     getCharactersSaga(),
     getBossesSaga(),
     getUserCharactersSaga(),
+    postUserCharactersSaga(),
+    
   ]);
 }

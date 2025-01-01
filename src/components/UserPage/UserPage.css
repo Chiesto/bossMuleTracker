@@ -5,20 +5,29 @@
 }
 
 
-.userPageBtn{
-
+.addCharacterFormParentContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
 }
 
-/* Container styling */
 .addCharacterFormContainer {
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: scroll;
+}
   
   /* Form inputs */
   .addCharacterInputs {
@@ -66,12 +75,26 @@
   
   .bossGallery li {
     padding: 8px;
-    background-color: #efefef;
+    background-color: transparent;
     border: 1px solid #ccc;
     border-radius: 4px;
     text-align: center;
+    transition: all 0.3s ease;
+
+  }
+
+  .bossGalleryItem:hover{
+    background-color: #a17878;;
+    border-style: inset;
   }
   
+  .bossGalleryItem:active {
+    border-style: inset;
+    box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.3); /* Deeper indent when clicked */
+    background-color: #e0e0e0; /* Darker background for a pressed look */
+    transform: translateY(1px); /* Optional: slight downward movement */
+  }
+
   /* Submit button */
   .submit-button {
     margin-top: 40px;
@@ -89,3 +112,28 @@
   .submit-button:hover {
     background-color: #0056b3;
   }
+
+  /* ---------------- TABLE -------------------- */
+
+  .characterTable {
+    width: 800px; /* Fixed width for the table */
+    table-layout: fixed; /* Ensures the table columns have a fixed width */
+    border-collapse: collapse; /* Optional, to collapse borders between cells */
+    margin: 0 auto; /* Center the table horizontally */
+  }
+  
+  .characterTable th,
+  .characterTable td {
+    border: 1px solid #ddd; /* Optional, adds borders to cells */
+    padding: 8px; /* Optional, adds padding inside cells */
+    text-align: left; /* Aligns text to the left */
+  }
+  
+  .characterTable th {
+    background-color: #f2f2f2; /* Optional, adds a background color to headers */
+  }
+  
+  .characterTable td {
+    white-space: normal; /* Ensures text wraps when necessary */
+  }
+  

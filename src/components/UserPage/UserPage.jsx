@@ -12,45 +12,22 @@ function UserPage() {
   const userCharacters = useSelector((store) => store.userCharacters.rows);
 
   const [addCharacterOn, setAddCharacterOn] = useState(false)
-  const [characterName, setCharacterName] = useState('');
-  const [characterClass, setCharacterClass] = useState('');
-  const [mainStat, setMainStat] = useState(0);
-  const [combatPower, setCombatPower] = useState(0);
-  const [bossIds, setBossIds] = useState([]);
-  const [weeklyMoney, setWeeklyMoney] = useState(0);
   
-
-
   const dispatch = useDispatch();
-  
 
-  const addCharacter = (characterToAdd) => {
-    dispatch({type: 'POST_USER_CHARACTER', payload:characterToAdd})
-
+  // Function to get boss names based on the ability_to_clear IDs
+  const idToBossName = (idArray) => {
+    return bosses
+      .filter(boss => idArray.includes(boss.id)) // Filter the bosses
+      .map(boss => boss.bossname) // Extract the boss names
+      .join(', '); // Join names into a comma-separated string
   }
-
-  const bossSelection = (i) => {
-    const boss = bosses[i];
-  
-    if (!bossIds.includes(boss.id)) {
-      setBossIds([...bossIds, boss.id]);
-    }
-  
-    const weeklyBosses = bosses.slice(0, i + 1);
-    const weeklyBossIncome = weeklyBosses.reduce(
-      (accumulator, currentValue) => accumulator + currentValue.money_earned, 0
-    );
-    setWeeklyMoney(weeklyBossIncome);
-  };
-  
-
   
 
   useEffect(()=>{
     dispatch({ type: 'FETCH_CHARACTERS' });
     dispatch({ type: 'FETCH_BOSSES' });
     dispatch({ type: 'FETCH_USER_CHARACTERS', payload: user.id});
-
   }, [dispatch, user.id]);
 
   
@@ -61,74 +38,40 @@ function UserPage() {
       <LogOutButton className="btn" />
 
       <div>
-        <p>Your characters</p>
-        {userCharacters?.map((character, i)=>(
-          <p key={i}>{character.char_name}</p>
-        ))}
-        <p>Weekly Bosses Complete</p>
-          {userCharacters && (
-            userCharacters.map((userChar, i) =>(
-              <li key={i}>{userChar.ability_to_clear}</li>
-            ))
-          )}
-        <p>Weekly Quest</p>
-        
-        <button onClick={()=>setAddCharacterOn(true)}>Add a Character</button>
-          <AddCharacterForm />
-        {addCharacterOn && (
-          <div className="addCharacterFormContainer">
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                addCharacter({
-                  user_id: user.id,
-                  characterClass,
-                  characterName,
-                  weeklyMoney,
-                  mainStat,
-                  combatPower,
-                });
-              }}
-            >
 
-            <div className="addCharacterInputs">
-              <div className="form-group">
-                <label htmlFor="characterName">Character Name:</label>
-                <input id="characterName" name="characterName" type="text" required placeholder="Enter character name" onChange={(e)=>setCharacterName(e.target.value)}/>
-              </div>
-        
-              <div className="form-group">
-                <label htmlFor="class">Class:</label>
-                <input id="class" name="class" type="text" required placeholder="Enter class" onChange={(e)=>setCharacterClass(e.target.value)}/>
-              </div>
-        
-              <div className="form-group">
-                <label htmlFor="mainStatLevel">Main Stat Level:</label>
-                <input id="mainStatLevel" name="mainStatLevel" type="number" required placeholder="Enter main stat level" onChange={(e)=>setMainStat(e.target.value)}/>
-              </div>
-        
-              <div className="form-group">
-                <label htmlFor="combatPower">Combat Power:</label>
-                <input id="combatPower" name="combatPower" type="number" required placeholder="Enter combat power" onChange={(e)=>setCombatPower(e.target.value)}/>
-              </div>
-            </div>
-        
-            <div className="bossGalleryContainer">
-              <p>Bosses this character can clear:</p>
-              <ul className="bossGallery">
-                {bosses?.map((boss, i) => (
-                  <li onClick={()=> bossSelection(i)} key={i}>{boss.bossname}</li>
-                ))}
-              </ul>
-            </div>
-        
-            <button type="submit" className="submit-button">Add Character</button>
-          </form>
-        </div>
+        {/* Table Start ---------- */}
+        <table className="characterTable">
+          <thead>
+            <tr>
+              <th>Your Characters</th>
+              <th>Weekly Bosses Complete</th>
+              <th>Weekly Quest</th>
+            </tr>
+          </thead>
+          <tbody>
+            {userCharacters?.map((character, index) => (
+              <tr key={index}>
+                <td>{character.char_name}</td>
+                <td>
+                  {character.ability_to_clear?.length > 0 ? (
+                    idToBossName(character.ability_to_clear) // Convert ID array to boss names
+                  ) : (
+                    'None'
+                  )}
+                </td>
+                <td>Weekly Quest Placeholder</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        {/* Table End ---------- */}
+          
+        <button onClick={() => setAddCharacterOn(true)}>Add Character</button>
+          
+        {addCharacterOn && (
+          <AddCharacterForm setAddCharacterOn={setAddCharacterOn}/>
         )}
         
-          
-       
       </div>
     </div>
   );
